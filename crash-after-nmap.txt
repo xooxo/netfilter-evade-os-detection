@@ -1,0 +1,92 @@
+  190.510890] old tcp_checksum=f419 
+[  190.633183] detected buffer overflow in memcpy
+[  190.637128] ------------[ cut here ]------------
+[  190.637128] kernel BUG at lib/string_helpers.c:1027!
+[  190.637128] invalid opcode: 0000 [#1] PREEMPT SMP NOPTI
+[  190.637128] CPU: 0 PID: 0 Comm: swapper/0 Tainted: G       1
+[  190.637128] Hardware name: QEMU Standard PC (Q35 + ICH9, 204
+[  190.637128] RIP: 0010:fortify_panic+0xf/0x11
+[  190.637128] Code: 90 99 da 99 48 89 d6 e8 89 9d fe ff 49 8d9
+[  190.661889] RSP: 0018:ffffd5ea40003798 EFLAGS: 00010246
+[  190.661889] RAX: 0000000000000022 RBX: ffff8f53ca04e300 RCXf
+[  190.661889] RDX: 0000000000000000 RSI: 00000000000000f6 RDIf
+[  190.674372] RBP: 0000000000000044 R08: 0000000000000000 R090
+[  190.674372] R10: 0000000000000003 R11: ffffffff9a4d46c8 R120
+[  190.674372] R13: 0000000000000000 R14: ffff8f53d1ede040 R150
+[  190.674372] FS:  0000000000000000(0000) GS:ffff8f543dc000000
+[  190.674372] CS:  0010 DS: 0000 ES: 0000 CR0: 000000008005003
+[  190.674372] CR2: 00007f7a3635f030 CR3: 0000000001984000 CR40
+[  190.674372] Call Trace:
+[  190.674372]  <IRQ>
+[  190.674372]  modify_packet.cold+0xc/0xc [netfilter_module]
+[  190.674372]  nf_hook_slow+0x41/0xc0
+[  190.674372]  __ip_local_out+0xde/0x160
+[  190.674372]  ? ip_output+0x130/0x130
+[  190.674372]  ip_build_and_send_pkt+0x10f/0x290
+[  190.674372]  tcp_v4_send_synack+0xb6/0x1e0
+[  190.674372]  ? _raw_spin_unlock_irqrestore+0xa/0x40
+[  190.674372]  tcp_conn_request+0xb2e/0xe40
+[  190.674372]  ? tcp_rcv_state_process+0x426/0x1000
+[  190.674372]  ? tcp_v4_send_ack+0x3f0/0x3f0
+[  190.674372]  tcp_rcv_state_process+0x426/0x1000
+[  190.674372]  ? bpf_lsm_socket_shutdown+0x10/0x10
+[  190.674372]  ? security_sock_rcv_skb+0x34/0x50
+[  190.674372]  ? sk_filter_trim_cap+0x12b/0x250
+[  190.674372]  tcp_v4_do_rcv+0xc4/0x280
+[  190.674372]  tcp_v4_rcv+0xe16/0xee0
+[  190.674372]  ip_protocol_deliver_rcu+0x32/0x210
+[  190.674372]  ip_local_deliver_finish+0x72/0x90
+[  190.674372]  ip_sublist_rcv_finish+0x7e/0x90
+[  190.674372]  ip_sublist_rcv+0x192/0x240
+[  190.674372]  ? __napi_build_skb+0x58/0x70
+[  190.674372]  ip_list_rcv+0x139/0x170
+[  190.674372]  __netif_receive_skb_list_core+0x29e/0x2c0
+[  190.674372]  ? reqsk_fastopen_remove+0x190/0x190
+[  190.674372]  netif_receive_skb_list_internal+0x1cd/0x300
+[  190.674372]  napi_complete_done+0x6d/0x1a0
+[  190.674372]  virtnet_poll+0x371/0x4e4 [virtio_net]
+[  190.674372]  __napi_poll+0x2b/0x160
+[  190.674372]  net_rx_action+0x2a0/0x350
+[  190.674372]  ? kvm_emulate_wbinvd_noskip.part.0+0x80/0x80 []
+[  190.674372]  ? __napi_schedule+0x84/0xa0
+[  190.674372]  handle_softirqs+0xd7/0x280
+[  190.674372]  ? handle_edge_irq+0x87/0x220
+[  190.674372]  __irq_exit_rcu+0xac/0xe0
+[  190.674372]  common_interrupt+0x82/0xa0
+[  190.674372]  </IRQ>
+[  190.674372]  <TASK>
+[  190.674372]  asm_common_interrupt+0x22/0x40
+[  190.674372] RIP: 0010:native_safe_halt+0xb/0x10
+[  190.674372] Code: 7f e9 09 0f 3b 00 65 48 8b 04 25 80 fb 01f
+[  190.674372] RSP: 0018:ffffffff9a403e90 EFLAGS: 00000216
+[  190.674372] RAX: ffffffff994507b0 RBX: 0000000000000000 RCX0
+[  190.674372] RDX: 4000000000000000 RSI: 0000000000000087 RDIc
+[  190.674372] RBP: ffffffff9a41aa40 R08: 0000000000004d8b R097
+[  190.674372] R10: 00000000fffffffb R11: 0000000000000001 R120
+[  190.674372] R13: 0000000000000000 R14: 0000000000000000 R150
+[  190.674372]  ? __sched_text_end+0x6/0x6
+[  190.674372]  default_idle+0xa/0x10
+[  190.674372]  default_idle_call+0x38/0xf0
+[  190.674372]  do_idle+0x206/0x2b0
+[  190.674372]  cpu_startup_entry+0x26/0x30
+[  190.674372]  rest_init+0xca/0xd0
+[  190.674372]  arch_call_rest_init+0xa/0x14
+[  190.674372]  start_kernel+0x70a/0x733
+[  190.674372]  secondary_startup_64_no_verify+0xe5/0xeb
+[  190.674372]  </TASK>
+[  190.674372] Modules linked in: netfilter_module(OE) cfg8021g
+[  190.839600] ---[ end trace 0000000000000000 ]---
+[  190.841861] RIP: 0010:fortify_panic+0xf/0x11
+[  190.843582] Code: 90 99 da 99 48 89 d6 e8 89 9d fe ff 49 8d9
+[  190.847591] RSP: 0018:ffffd5ea40003798 EFLAGS: 00010246
+[  190.851587] RAX: 0000000000000022 RBX: ffff8f53ca04e300 RCXf
+[  190.855614] RDX: 0000000000000000 RSI: 00000000000000f6 RDIf
+[  190.859553] RBP: 0000000000000044 R08: 0000000000000000 R090
+[  190.860151] R10: 0000000000000003 R11: ffffffff9a4d46c8 R120
+[  190.863566] R13: 0000000000000000 R14: ffff8f53d1ede040 R150
+[  190.867599] FS:  0000000000000000(0000) GS:ffff8f543dc000000
+[  190.871778] CS:  0010 DS: 0000 ES: 0000 CR0: 000000008005003
+[  190.875573] CR2: 00007f7a3635f030 CR3: 0000000001984000 CR40
+[  190.876210] Kernel panic - not syncing: Fatal exception in t
+[  190.876210] Kernel Offset: 0x17a00000 from 0xffffffff810000)
+[  190.876210] ---[ end Kernel panic - not syncing: Fatal exce
